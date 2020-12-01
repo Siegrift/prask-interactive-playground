@@ -277,22 +277,18 @@ export default function Home() {
                   )}
                 />
                 <Column title="Veľkosť" dataIndex="size" />
-                <Column
-                  title="Naplnenie"
-                  dataIndex="filled"
-                  // render={(_text, record) =>
-                  //  `${record.filled} / ${record.size}`
-                  //}
-                />
-                <Column
-                  title="Kopírovanie"
-                  dataIndex="copied"
-                  // render={(_text, record) =>
-                  //  `${record.copied} / ${record.size}`
-                  //}
-                />
+                <Column title="Naplnenie" dataIndex="filled" />
+                <Column title="Kopírovanie" dataIndex="copied" />
                 <Column title="Predošlé skóre" dataIndex="scorePrev" />
                 <Column title="Skóre celkovo" dataIndex="score" />
+                <Column
+                  title="Pomer"
+                  render={(_, r) =>
+                    `${r.score} / ${r.size} = ${
+                      Math.round((r.score / r.size) * 100) / 100
+                    }`
+                  }
+                />
               </Table>
               ,
             </FormItem>
@@ -345,14 +341,15 @@ export default function Home() {
             ref={modalInputRef}
             placeholder="Koľko?"
             style={{ width: '100%' }}
-            min={vectors[0] ? vectors[0].size : 1}
+            min={vectors[0] ? vectors[0].size + 1 : 1}
             max={MAX_INPUT}
             value={modalInput}
             onChange={setModalInput}
             onKeyDown={({ key }) => {
               if (
                 key === 'Enter' &&
-                modalInput >= (vectors[0] ? vectors[0].size : 1)
+                modalInput >= (vectors[0] ? vectors[0].size : 1) &&
+                modalInput <= MAX_INPUT
               )
                 modalOkAction()
             }}
