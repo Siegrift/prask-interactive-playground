@@ -284,8 +284,8 @@ export default function Home() {
                 <Column
                   title="Pomer"
                   render={(_, r) =>
-                    `${r.score} / ${r.size} = ${
-                      Math.round((r.score / r.size) * 100) / 100
+                    `${r.score} / ${r.filled + r.copied} = ${
+                      Math.round((r.score / (r.filled + r.copied)) * 100) / 100
                     }`
                   }
                 />
