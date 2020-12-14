@@ -21,3 +21,11 @@ label {
     opacity: 0;
   }
 }
+
+tbody tr:not(:nth-child(2)) {
+  opacity: 0.5;
+}
+
+tbody tr:not(:nth-child(2)):hover > * {
+  opacity: 0.5;
+}
